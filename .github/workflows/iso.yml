@@ -16,15 +16,24 @@ jobs:
         VERSION=41
         IMAGE_NAME="ghcr.io/vtf6259/test-ublue"
         IMAGE_TAG="latest"
-        VARIANT="custom-test-ublue"  # Changed to lowercase
+        VARIANT="custom-test-ublue"
         
+        # Try to pull the image first
+        podman pull ghcr.io/ublue-os/isogenerator:latest || echo "Failed to pull latest, falling back to Fedora version tag"
+        
+        # If latest fails, try the Fedora version tag
+        if ! podman image exists ghcr.io/ublue-os/isogenerator:latest; then
+          podman pull ghcr.io/ublue-os/isogenerator:$VERSION || (echo "Failed to pull isogenerator image" && exit 1)
+        fi
+        
+        # Run the isogenerator
         podman run --rm --privileged \
           --volume .:/isogenerator/output \
           -e "VERSION=$VERSION" \
           -e "IMAGE_NAME=$IMAGE_NAME" \
           -e "IMAGE_TAG=$IMAGE_TAG" \
           -e "VARIANT=$VARIANT" \
-          "ghcr.io/ublue-os/isogenerator:$VERSION"
+          ghcr.io/ublue-os/isogenerator:latest || ghcr.io/ublue-os/isogenerator:$VERSION
 
     - name: Upload ISO artifact
       uses: actions/upload-artifact@v4
