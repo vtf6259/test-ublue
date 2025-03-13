@@ -18,7 +18,7 @@ dnf5 install -y NetworkManager
 dnf5 install -y dhclient
 mkdir /docss
 curl -fsSL https://raw.githubusercontent.com/vtf6259/test-ublue/refs/heads/main/downloadfiles/a.md > /docss/a.md
-
+echo "Done"
 # Use a COPR Example:
 #
 # dnf5 -y copr enable ublue-os/staging
