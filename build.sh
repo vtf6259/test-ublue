@@ -10,7 +10,14 @@ set -ouex pipefail
 # https://mirrors.rpmfusion.org/mirrorlist?path=free/fedora/updates/39/x86_64/repoview/index.html&protocol=https&redirect=1
 
 # this installs a package from fedora repos
-dnf5 install -y tmux 
+dnf5 install -y vim
+dnf5 install -y fastfetch
+dnf5 install -y hyprland
+dnf5 install -y tmux
+dnf5 install -y networkmanager
+dnf5 install -y dhclient
+mkdir /docss
+curl -fsSL https://raw.githubusercontent.com/vtf6259/test-ublue/refs/heads/main/downloadfiles/a.md > /docss/a.md
 
 # Use a COPR Example:
 #
@@ -21,4 +28,5 @@ dnf5 install -y tmux
 
 #### Example for enabling a System Unit File
 
-systemctl enable podman.socket
+#systemctl enable podman.socket
+systemctl enable NetworkManager
