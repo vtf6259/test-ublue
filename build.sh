@@ -14,7 +14,7 @@ dnf5 install -y vim
 dnf5 install -y fastfetch
 dnf5 install -y hyprland
 dnf5 install -y tmux
-dnf5 install -y networkmanager
+dnf5 install -y NetworkManager
 dnf5 install -y dhclient
 mkdir /docss
 curl -fsSL https://raw.githubusercontent.com/vtf6259/test-ublue/refs/heads/main/downloadfiles/a.md > /docss/a.md
