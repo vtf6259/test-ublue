@@ -1,0 +1,54 @@
+name: Release ISO
+on:
+  push:
+    tags:
+      - '*'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Generate ISO
+      run: |
+        VERSION=41
+        IMAGE_NAME="ghcr.io/vtf6259/test-ublue"
+        IMAGE_TAG="latest"
+        VARIANT="Custom Test UBlue"
+        
+        sudo podman run --rm --privileged \
+          --volume .:/isogenerator/output \
+          -e VERSION=$VERSION \
+          -e IMAGE_NAME=$IMAGE_NAME \
+          -e IMAGE_TAG=$IMAGE_TAG \
+          -e VARIANT=$VARIANT \
+          ghcr.io/ublue-os/isogenerator:$VERSION
+
+    - name: Upload ISO artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: release-iso
+        path: '*.iso'
+
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+    - name: Download ISO artifact
+      uses: actions/download-artifact@v4
+      with:
+        name: release-iso
+
+    - name: Create Release with ISO
+      uses: ncipollo/release-action@v1
+      with:
+        artifacts: "*.iso"
+        draft: false
+        prerelease: false
+        generateReleaseNotes: true
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
