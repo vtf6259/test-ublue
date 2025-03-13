@@ -16,15 +16,15 @@ jobs:
         VERSION=41
         IMAGE_NAME="ghcr.io/vtf6259/test-ublue"
         IMAGE_TAG="latest"
-        VARIANT="Custom Test UBlue"
+        VARIANT="custom-test-ublue"  # Changed to lowercase
         
-        sudo podman run --rm --privileged \
+        podman run --rm --privileged \
           --volume .:/isogenerator/output \
-          -e VERSION=$VERSION \
-          -e IMAGE_NAME=$IMAGE_NAME \
-          -e IMAGE_TAG=$IMAGE_TAG \
-          -e VARIANT=$VARIANT \
-          ghcr.io/ublue-os/isogenerator:$VERSION
+          -e "VERSION=$VERSION" \
+          -e "IMAGE_NAME=$IMAGE_NAME" \
+          -e "IMAGE_TAG=$IMAGE_TAG" \
+          -e "VARIANT=$VARIANT" \
+          "ghcr.io/ublue-os/isogenerator:$VERSION"
 
     - name: Upload ISO artifact
       uses: actions/upload-artifact@v4
