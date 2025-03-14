@@ -21,7 +21,7 @@ dnf5 install -y alacritty
 mkdir /docss
 curl -fsSL https://raw.githubusercontent.com/vtf6259/test-ublue/refs/heads/main/downloadfiles/a.md > /docss/a.md
 flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
-flatpak install flathub app.zen_browser.zen
+yes | flatpak install flathub app.zen_browser.zen
 # Use a COPR Example:
 #
 # dnf5 -y copr enable ublue-os/staging
