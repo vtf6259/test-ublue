@@ -16,12 +16,12 @@ dnf5 install -y sway
 dnf5 install -y tmux
 dnf5 install -y NetworkManager
 dnf5 install -y dhclient
-curl -fsSL https://repo.librewolf.net/librewolf.repo | pkexec tee /etc/yum.repos.d/librewolf.repo
-dnf5 install -y librewolf
+dnf5 install -y flatpak
 dnf5 install -y alacritty
 mkdir /docss
 curl -fsSL https://raw.githubusercontent.com/vtf6259/test-ublue/refs/heads/main/downloadfiles/a.md > /docss/a.md
-echo "Done"
+flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+flatpak install flathub app.zen_browser.zen
 # Use a COPR Example:
 #
 # dnf5 -y copr enable ublue-os/staging
