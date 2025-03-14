@@ -12,10 +12,13 @@ set -ouex pipefail
 # this installs a package from fedora repos
 dnf5 install -y vim
 dnf5 install -y fastfetch
-dnf5 install -y hyprland
+dnf5 install -y sway
 dnf5 install -y tmux
 dnf5 install -y NetworkManager
 dnf5 install -y dhclient
+curl -fsSL https://repo.librewolf.net/librewolf.repo | pkexec tee /etc/yum.repos.d/librewolf.repo
+dnf5 install -y librewolf
+dnf5 install -y alacritty
 mkdir /docss
 curl -fsSL https://raw.githubusercontent.com/vtf6259/test-ublue/refs/heads/main/downloadfiles/a.md > /docss/a.md
 echo "Done"
