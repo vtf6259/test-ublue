@@ -11,12 +11,23 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
 
+    - name: Pull isogenerator image
+      run: |
+        podman pull ghcr.io/ublue-os/isogenerator:latest || (echo "Failed to pull isogenerator image" && exit 1)
+
+    - name: Modify isogenerator Makefile
+      run: |
+        podman run --rm --privileged \
+          --volume .:/isogenerator/output \
+          ghcr.io/ublue-os/isogenerator:latest \
+          sed -i 's|sed '"'"'s/@IMAGE_NAME@/|sed '"'"'s#@IMAGE_NAME@#|' /isogenerator/Makefile
+
     - name: Generate ISO
       run: |
         VERSION=41
         IMAGE_NAME="ghcr.io/vtf6259/test-ublue"
         IMAGE_TAG="latest"
-        VARIANT="custom-test-ublue"  # Changed to lowercase
+        VARIANT="custom-test-ublue"
         
         podman run --rm --privileged \
           --volume .:/isogenerator/output \
@@ -24,7 +35,7 @@ jobs:
           -e "IMAGE_NAME=$IMAGE_NAME" \
           -e "IMAGE_TAG=$IMAGE_TAG" \
           -e "VARIANT=$VARIANT" \
-          "ghcr.io/ublue-os/isogenerator:latest"
+          ghcr.io/ublue-os/isogenerator:latest
 
     - name: Upload ISO artifact
       uses: actions/upload-artifact@v4
