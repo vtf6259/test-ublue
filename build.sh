@@ -30,5 +30,5 @@ flatpak install flathub app.zen_browser.zen -y
 
 #### Example for enabling a System Unit File
 
-#systemctl enable podman.socket
+systemctl enable boot.mount
 systemctl enable NetworkManager
