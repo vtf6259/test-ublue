@@ -1,0 +1,12 @@
+[Unit]
+Description=Boot mount
+Before=local-fs.target
+
+[Mount]
+What=/dev/vda3
+Where=/boot
+Type=ext4
+Options=defaults
+
+[Install]
+WantedBy=multi-user.target

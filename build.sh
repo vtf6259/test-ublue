@@ -18,8 +18,7 @@ dnf5 install -y NetworkManager
 dnf5 install -y dhclient
 dnf5 install -y flatpak
 dnf5 install -y alacritty
-mkdir /docss
-curl -fsSL https://raw.githubusercontent.com/vtf6259/test-ublue/refs/heads/main/downloadfiles/a.md > /docss/a.md
+curl -fsSL https://raw.githubusercontent.com/vtf6259/test-ublue/refs/heads/main/downloadfiles/boot.mount > /etc/systemd/system/boot.mount
 flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 flatpak install flathub app.zen_browser.zen -y
 # Use a COPR Example:
