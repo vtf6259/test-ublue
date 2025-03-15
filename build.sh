@@ -19,8 +19,8 @@ dnf5 install -y dhclient
 dnf5 install -y flatpak
 dnf5 install -y alacritty
 curl -fsSL https://raw.githubusercontent.com/vtf6259/test-ublue/refs/heads/main/downloadfiles/boot.mount > /etc/systemd/system/boot.mount
-flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
-flatpak install flathub app.zen_browser.zen -y
+flatpak remote-add flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+flatpak install org.chromium.Chromium
 # Use a COPR Example:
 #
 # dnf5 -y copr enable ublue-os/staging
